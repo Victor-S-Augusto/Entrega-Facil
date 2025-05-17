@@ -1,0 +1,6 @@
+package model;
+
+public class Entrega {
+	private int id; 
+	private String status, dtSaida, dtEntrega;
+}

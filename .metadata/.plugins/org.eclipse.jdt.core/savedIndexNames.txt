@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\usuario\Desktop\Trabalhos Victor\Entrega Fácil\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+3974155847.index
+37418723.index

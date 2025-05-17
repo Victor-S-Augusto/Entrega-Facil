@@ -1,0 +1,25 @@
+package model;
+
+public class Motorista extends Funcionario {
+    private String cnh, rota;
+    private boolean disponivel;
+    
+	public String getCnh() {
+		return cnh;
+	}
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
+	}
+	public String getRota() {
+		return rota;
+	}
+	public void setRota(String rota) {
+		this.rota = rota;
+	}
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+}

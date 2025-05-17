@@ -1,0 +1,6 @@
+package model;
+
+public class Motorista extends Funcionario {
+    private String cnh, rota;
+    private boolean disponivel;
+}
