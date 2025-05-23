@@ -1,9 +1,16 @@
 package model;
 
-public class Pessoa {
+public abstract class Pessoa {
     private int id;
     private String nome, endereco, telefone;
     
+    
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}

@@ -5,6 +5,13 @@ public class Veiculo {
 	private String placa, modelo;
 	private double capacidadeKg;
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getPlaca() {
 		return placa;
 	}
