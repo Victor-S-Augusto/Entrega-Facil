@@ -50,11 +50,13 @@ CREATE TABLE Carga (
 
 CREATE TABLE Entrega (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    status text,
+    data_saida DATE,
+    data_entrega DATE,
     id_cliente INT,
     id_motorista INT,
     id_veiculo INT,
     id_carga INT,
-    data_entrega DATE,
     FOREIGN KEY (id_cliente) REFERENCES Cliente(id),
     FOREIGN KEY (id_motorista) REFERENCES Motorista(id),
     FOREIGN KEY (id_veiculo) REFERENCES Veiculo(id),
