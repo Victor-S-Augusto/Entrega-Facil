@@ -37,14 +37,16 @@ public class Carga {
 	public void setEmRota(boolean emRota) {
 		this.emRota = emRota;
 	}
-	public Carga(int id, String descricao, double peso, double volume, boolean emRota) {
-		super();
-		this.id = id;
+	
+	//Construtor sem parametros
+	public Carga() {}
+	
+	//Construtor com parametros
+	public Carga(String descricao, double peso, double volume, boolean emRota) {
 		this.descricao = descricao;
 		this.peso = peso;
 		this.volume = volume;
 		this.emRota = emRota;
-	}
-	
+	}	
 	
 }

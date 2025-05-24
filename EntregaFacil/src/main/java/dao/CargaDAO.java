@@ -25,7 +25,7 @@ public class CargaDAO {
         String sql = "SELECT * FROM carga";
         try (Connection conn = Conexao.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Carga(rs.getInt("id"), rs.getString("descricao"), rs.getDouble("peso"), rs.getDouble("volume"), rs.getBoolean("emRota")));
+                lista.add(new Carga(rs.getString("descricao"), rs.getDouble("peso"), rs.getDouble("volume"), rs.getBoolean("emRota")));
             }
         } catch (SQLException e) { e.printStackTrace(); }
         return lista;
@@ -59,7 +59,7 @@ public class CargaDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Carga(rs.getInt("id"), rs.getString("descricao"), rs.getDouble("peso"), rs.getDouble("volume"), rs.getBoolean("emRota"));
+                return new Carga(rs.getString("descricao"), rs.getDouble("peso"), rs.getDouble("volume"), rs.getBoolean("emRota"));
             }
         } catch (SQLException e) { e.printStackTrace(); }
         return null;

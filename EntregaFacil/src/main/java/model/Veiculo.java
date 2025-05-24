@@ -30,4 +30,16 @@ public class Veiculo {
 	public void setCapacidadeKg(double capacidadeKg) {
 		this.capacidadeKg = capacidadeKg;
 	}
+
+	//Construtor com parametros
+	public Veiculo() {}
+
+	//Construtor com parametros
+	public Veiculo(String placa, String modelo, double capacidadeKg) {
+		this.placa = placa;
+		this.modelo = modelo;
+		this.capacidadeKg = capacidadeKg;
+	}
+	
+	
 }

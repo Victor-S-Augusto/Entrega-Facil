@@ -11,7 +11,7 @@ public class FuncionarioDAO {
 
 	// CREATE
     public void inserir(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (nome, documento, endereco, telefone, cargo, salario) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO funcionario (nome, endereco, telefone, cargo, salario) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, funcionario.getNome());

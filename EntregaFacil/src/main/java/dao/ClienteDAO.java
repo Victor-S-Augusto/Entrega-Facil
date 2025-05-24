@@ -13,7 +13,7 @@ public class ClienteDAO {
         String sql = "INSERT INTO Cliente (nome, endereco, telefone, cpf) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getEndereco());
@@ -21,7 +21,14 @@ public class ClienteDAO {
             stmt.setString(4, cliente.getCpf());
 
             stmt.executeUpdate();
-            System.out.println("Cliente inserido com sucesso!");
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                cliente.setId(rs.getInt(1));
+            }
+
+            rs.close();
+            System.out.println("Cliente inserido com sucesso! ID: " + cliente.getId());
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir cliente: " + e.getMessage());
