@@ -11,7 +11,7 @@ public class FuncionarioDAO {
 
 	// CREATE
     public void inserir(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (nome, endereco, telefone, cargo, salario) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO funcionario (nome, endereco, telefone, cargo, salario, dtAdmissao) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, funcionario.getNome());
@@ -19,6 +19,7 @@ public class FuncionarioDAO {
             stmt.setString(3, funcionario.getTelefone());
             stmt.setString(4, funcionario.getCargo());
             stmt.setDouble(5, funcionario.getSalario());
+            stmt.setDate(6,  new java.sql.Date(System.currentTimeMillis()));
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +41,7 @@ public class FuncionarioDAO {
                    f.setEndereco(rs.getString("endereco"));
                    f.setTelefone(rs.getString("telefone"));
                    f.setCargo(rs.getString("cargo"));
-                   f.setDtAdmissao(rs.getString("dtAdmissao"));
+                   f.setDtAdmissao(rs.getDate("dtAdmissao"));
                    f.setSalario(rs.getDouble("salario"));
                    
                    lista.add(f);
@@ -53,15 +54,14 @@ public class FuncionarioDAO {
     
     // UPDATE
     public void atualizar(Funcionario funcionario) {
-        String sql = "UPDATE funcionario SET nome = ?, endereco = ?, telefone = ?, cargo = ?, salario = ? WHERE id = ?";
+        String sql = "UPDATE funcionario SET endereco = ?, telefone = ?, cargo = ?, salario = ? WHERE id = ?";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, funcionario.getNome());
-            stmt.setString(2, funcionario.getEndereco());
-            stmt.setString(3, funcionario.getTelefone());
-            stmt.setString(4, funcionario.getCargo());
-            stmt.setDouble(5, funcionario.getSalario());
-            stmt.setInt(6, funcionario.getId());
+            stmt.setString(1, funcionario.getEndereco());
+            stmt.setString(2, funcionario.getTelefone());
+            stmt.setString(3, funcionario.getCargo());
+            stmt.setDouble(4, funcionario.getSalario());
+            stmt.setInt(5, funcionario.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

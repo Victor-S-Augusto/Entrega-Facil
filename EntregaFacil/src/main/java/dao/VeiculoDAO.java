@@ -61,25 +61,9 @@ public class VeiculoDAO {
     }
     
     // UPDATE
-    public void atualizar(Veiculo veiculo) {
-        String sql = "UPDATE veiculo SET placa=?, modelo=?, capacidade=? WHERE id=?";
-        
-        try (Connection conn = Conexao.getConnection(); 
-        		PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-        	stmt.setString(1, veiculo.getPlaca());
-            stmt.setString(2, veiculo.getModelo());
-            stmt.setDouble(3, veiculo.getCapacidadeKg());
-            stmt.setInt(4, veiculo.getId());
-            
-            stmt.executeUpdate();
-            System.out.println("Veiculo Atualizado com sucesso!");
-            
-        } catch (SQLException e) {
-        	System.out.println("Erro ao atualizar cliente: " + e.getMessage());
-        }
-    }
-
+    // A classe veiculo não possui atributos que podem ser alterados depois de criados
+    
+    
     // DELETE
     public void excluir(int id) {
         String sql = "DELETE FROM veiculo WHERE id=?";

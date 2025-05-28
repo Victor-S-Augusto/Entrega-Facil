@@ -21,16 +21,11 @@ CREATE TABLE Funcionario (
 );
 
 CREATE TABLE Motorista (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    endereco VARCHAR(255),
-    telefone VARCHAR(15),
-    cargo VARCHAR(50),
-    salario DECIMAL(10, 2),
-    dtAdmissao DATE,
+    id INT PRIMARY KEY,
     cnh VARCHAR(20) UNIQUE NOT NULL,
     rota VARCHAR(100),
-    disponivel BOOLEAN DEFAULT TRUE
+    disponivel BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (id) REFERENCES Funcionario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Veiculo (
@@ -45,7 +40,8 @@ CREATE TABLE Carga (
     descricao VARCHAR(255) NOT NULL,
     peso DECIMAL(10, 2) NOT NULL,
     volume DECIMAL(10, 2) NOT NULL,
-    emRota BOOLEAN DEFAULT FALSE
+    emRota BOOLEAN DEFAULT FALSE,
+    id_cliente INT REFERENCES cliente(id)
 );
 
 CREATE TABLE Entrega (

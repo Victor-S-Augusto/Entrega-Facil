@@ -127,4 +127,19 @@ public class ClienteDAO {
 
         return c;
     }
+    
+    public boolean estaVazio() {
+        String sql = "SELECT COUNT(*) AS total FROM carga";
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("total") == 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

@@ -47,6 +47,11 @@ public class Carga {
 		this.peso = peso;
 		this.volume = volume;
 		this.emRota = emRota;
+	}
+	@Override
+	public String toString() {
+		return "Carga [id=" + id + ", descricao=" + descricao + ", peso=" + peso + ", volume=" + volume + ", emRota="
+				+ emRota + "]";
 	}	
 	
 }

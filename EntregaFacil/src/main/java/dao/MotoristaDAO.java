@@ -19,7 +19,7 @@ public class MotoristaDAO {
             stmt.setString(2, motorista.getEndereco());
             stmt.setString(3, motorista.getTelefone());
             stmt.setString(4, motorista.getCargo());
-            stmt.setString(5, motorista.getDtAdmissao());
+            stmt.setDate(5, new java.sql.Date(System.currentTimeMillis()));
             stmt.setDouble(6, motorista.getSalario());
             stmt.setString(7, motorista.getCnh());
             stmt.setString(8, motorista.getRota());
@@ -49,7 +49,7 @@ public class MotoristaDAO {
                 m.setEndereco(rs.getString("endereco"));
                 m.setTelefone(rs.getString("telefone"));
                 m.setCargo(rs.getString("cargo"));
-                m.setDtAdmissao(rs.getString("dtAdmissao"));
+                m.setDtAdmissao(rs.getDate("dtAdmissao"));
                 m.setSalario(rs.getDouble("salario"));
                 m.setCnh(rs.getString("cnh"));
                 m.setRota(rs.getString("rota"));
@@ -67,24 +67,22 @@ public class MotoristaDAO {
 
     // UPDATE
     public void atualizar(Motorista motorista) {
-        String sql = "UPDATE Motorista SET nome=?, endereco=?, telefone=?, cargo=?, dtAdmissao=?, salario=?, cnh=?, rota=?, disponivel=? WHERE id=?";
+        String sql = "UPDATE Motorista SET endereco=?, telefone=?, cargo=?, dtAdmissao=?, salario=?, cnh=?, rota=?, disponivel=? WHERE id=?";
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, motorista.getNome());
-            stmt.setString(2, motorista.getEndereco());
-            stmt.setString(3, motorista.getTelefone());
-            stmt.setString(4, motorista.getCargo());
-            stmt.setString(5, motorista.getDtAdmissao());
-            stmt.setDouble(6, motorista.getSalario());
-            stmt.setString(7, motorista.getCnh());
-            stmt.setString(8, motorista.getRota());
-            stmt.setBoolean(9, motorista.isDisponivel());
-            stmt.setInt(10, motorista.getId());
+            stmt.setString(1, motorista.getEndereco());
+            stmt.setString(2, motorista.getTelefone());
+            stmt.setString(3, motorista.getCargo());
+            stmt.setDate(4, motorista.getDtAdmissao());
+            stmt.setDouble(5, motorista.getSalario());
+            stmt.setString(6, motorista.getCnh());
+            stmt.setString(7, motorista.getRota());
+            stmt.setBoolean(8, motorista.isDisponivel());
+            stmt.setInt(9, motorista.getId());
 
             stmt.executeUpdate();
-            System.out.println("Motorista atualizado com sucesso!");
 
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar motorista: " + e.getMessage());
@@ -110,26 +108,25 @@ public class MotoristaDAO {
     // BUSCAR POR ID
     public Motorista buscarPorId(int id) {
         String sql = "SELECT * FROM Motorista WHERE id=?";
-        Motorista m = null;
-
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
-                m = new Motorista();
+            	
+                Motorista m = new Motorista();
                 m.setId(rs.getInt("id"));
                 m.setNome(rs.getString("nome"));
                 m.setEndereco(rs.getString("endereco"));
                 m.setTelefone(rs.getString("telefone"));
                 m.setCargo(rs.getString("cargo"));
-                m.setDtAdmissao(rs.getString("dtAdmissao"));
+                m.setDtAdmissao(rs.getDate("dtAdmissao"));
                 m.setSalario(rs.getDouble("salario"));
                 m.setCnh(rs.getString("cnh"));
                 m.setRota(rs.getString("rota"));
                 m.setDisponivel(rs.getBoolean("disponivel"));
+                return m;
             }
 
             rs.close();
@@ -137,7 +134,6 @@ public class MotoristaDAO {
         } catch (SQLException e) {
             System.out.println("Erro ao buscar motorista por ID: " + e.getMessage());
         }
-
         return null;
     }
 }

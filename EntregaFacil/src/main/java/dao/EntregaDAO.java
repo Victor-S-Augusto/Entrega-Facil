@@ -14,12 +14,12 @@ public class EntregaDAO {
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, entrega.getCliente().getId());
-            stmt.setInt(2, entrega.getMotorista().getId());
-            stmt.setInt(3, entrega.getVeiculo().getId());
-            stmt.setInt(4, entrega.getCarga().getId());
+            stmt.setInt(1, entrega.getId_cliente());
+            stmt.setInt(2, entrega.getId_motorista());
+            stmt.setInt(3, entrega.getId_veiculo());
+            stmt.setInt(4, entrega.getId_carga());
             stmt.setString(5, entrega.getStatus());
-            stmt.setDate(6, new java.sql.Date(entrega.getDtSaida().getTime()));
+            stmt.setDate(6, new java.sql.Date(System.currentTimeMillis()));
             stmt.setDate(7, new java.sql.Date(entrega.getDtEntrega().getTime()));
 
             stmt.executeUpdate();
@@ -30,19 +30,18 @@ public class EntregaDAO {
     }
 
     public void atualizar(Entrega entrega) {
-        String sql = "UPDATE entrega SET id_cliente=?, id_motorista=?, id_veiculo=?, id_carga=?, status=?, dt_saida=?, dt_entrega=? WHERE id=?";
+        String sql = "UPDATE entrega SET id_cliente=?, id_motorista=?, id_veiculo=?, id_carga=?, status=?, dt_entrega=? WHERE id=?";
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, entrega.getCliente().getId());
-            stmt.setInt(2, entrega.getMotorista().getId());
-            stmt.setInt(3, entrega.getVeiculo().getId());
-            stmt.setInt(4, entrega.getCarga().getId());
+            stmt.setInt(1, entrega.getId_cliente());
+            stmt.setInt(2, entrega.getId_motorista());
+            stmt.setInt(3, entrega.getId_veiculo());
+            stmt.setInt(4, entrega.getId_carga());
             stmt.setString(5, entrega.getStatus());
-            stmt.setDate(6, new java.sql.Date(entrega.getDtSaida().getTime()));
-            stmt.setDate(7, new java.sql.Date(entrega.getDtEntrega().getTime()));
-            stmt.setInt(8, entrega.getId());
+            stmt.setDate(6, new java.sql.Date(entrega.getDtEntrega().getTime()));
+            stmt.setInt(7, entrega.getId());
 
             stmt.executeUpdate();
 
@@ -111,24 +110,12 @@ public class EntregaDAO {
 
         entrega.setId(rs.getInt("id"));
         entrega.setStatus(rs.getString("status"));
+        entrega.setId_cliente(rs.getInt("id_cliente"));
+        entrega.setId_motorista(rs.getInt("id_motorista"));
+        entrega.setId_carga(rs.getInt("id_carga"));
+        entrega.setId_veiculo(rs.getInt("id_veiculo"));
         entrega.setDtSaida(rs.getDate("dt_saida"));
         entrega.setDtEntrega(rs.getDate("dt_entrega"));
-
-        Cliente cliente = new Cliente();
-        cliente.setId(rs.getInt("id_cliente"));
-        entrega.setCliente(cliente);
-
-        Motorista motorista = new Motorista();
-        motorista.setId(rs.getInt("id_motorista"));
-        entrega.setMotorista(motorista);
-
-        Veiculo veiculo = new Veiculo();
-        veiculo.setId(rs.getInt("id_veiculo"));
-        entrega.setVeiculo(veiculo);
-
-        Carga carga = new Carga();
-        carga.setId(rs.getInt("id_carga"));
-        entrega.setCarga(carga);
 
         return entrega;
     }

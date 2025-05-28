@@ -3,24 +3,20 @@ package model;
 import java.util.Date;
 
 public class Entrega {
-    private int id;
-    private String status;
+	private int id, id_cliente, id_motorista, id_veiculo, id_carga;
+	private String status;
     private Date dtSaida;
     private Date dtEntrega;
-
-    private Cliente cliente;
-    private Motorista motorista;
-    private Veiculo veiculo;
-    private Carga carga;
-
+   
+    
     public Entrega() {}
 
-    public Entrega(int id, Cliente cliente, Motorista motorista, Veiculo veiculo, Carga carga, String status, Date dtSaida, Date dtEntrega) {
+    public Entrega(int id, int id_cliente, int id_motorista, int id_veiculo, int id_carga, String status, Date dtSaida, Date dtEntrega) {
         this.id = id;
-        this.cliente = cliente;
-        this.motorista = motorista;
-        this.veiculo = veiculo;
-        this.carga = carga;
+        this.id_cliente = id_cliente;
+        this.id_motorista = id_motorista;
+        this.id_veiculo = id_veiculo;
+        this.id_carga = id_carga;
         this.status = status;
         this.dtSaida = dtSaida;
         this.dtEntrega = dtEntrega;
@@ -40,15 +36,35 @@ public class Entrega {
     public Date getDtEntrega() { return dtEntrega; }
     public void setDtEntrega(Date dtEntrega) { this.dtEntrega = dtEntrega; }
 
-    public Cliente getCliente() { return cliente; }
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+	public int getId_cliente() {
+		return id_cliente;
+	}
 
-    public Motorista getMotorista() { return motorista; }
-    public void setMotorista(Motorista motorista) { this.motorista = motorista; }
+	public void setId_cliente(int id_cliente) {
+		this.id_cliente = id_cliente;
+	}
 
-    public Veiculo getVeiculo() { return veiculo; }
-    public void setVeiculo(Veiculo veiculo) { this.veiculo = veiculo; }
+	public int getId_motorista() {
+		return id_motorista;
+	}
 
-    public Carga getCarga() { return carga; }
-    public void setCarga(Carga carga) { this.carga = carga; }
+	public void setId_motorista(int id_motorista) {
+		this.id_motorista = id_motorista;
+	}
+
+	public int getId_veiculo() {
+		return id_veiculo;
+	}
+
+	public void setId_veiculo(int id_veiculo) {
+		this.id_veiculo = id_veiculo;
+	}
+
+	public int getId_carga() {
+		return id_carga;
+	}
+
+	public void setId_carga(int id_carga) {
+		this.id_carga = id_carga;
+	}
 }
